@@ -82,10 +82,46 @@
                       "type": "string"
                     },
                     "data": {
-                      "type": "array",
-                      "items": {
                         "$ref": "#/components/schemas/Building"
-                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buildings/{buildingId}": {
+      "get": {
+        "tags": [
+          "Building API"
+        ],
+        "summary": "Get building by Id",
+        "description": "Get building by Id",
+        "parameters": [
+          {
+            "name": "buildingId",
+            "in": "path",
+            "description": "Building Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success get Building",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                        "$ref": "#/components/schemas/Building"
                     }
                   }
                 }

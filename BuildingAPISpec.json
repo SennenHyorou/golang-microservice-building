@@ -13,6 +13,11 @@
   "paths": {
     "/buildings": {
       "get": {
+        "security": [
+          {
+            "CategoryAuth" : []
+          }
+        ],
         "tags": [
           "Building API"
         ],
@@ -46,10 +51,15 @@
         }
       },
       "post": {
+        "security": [
+          {
+            "CategoryAuth" : []
+          }
+        ],
         "tags": [
           "Building API"
         ],
-        "summary": "Create new Bulding",
+        "summary": "Create new Building",
         "requestBody": {
           "content": {
             "application/json": {
@@ -86,6 +96,11 @@
     },
     "/buildings/{buildingId}": {
       "get": {
+        "security": [
+          {
+            "CategoryAuth" : []
+          }
+        ],
         "tags": [
           "Building API"
         ],
@@ -123,6 +138,11 @@
         }
       },
       "put": {
+        "security": [
+          {
+            "CategoryAuth" : []
+          }
+        ],
         "tags": [
           "Building API"
         ],
@@ -169,6 +189,11 @@
         }
       },
       "delete": {
+        "security": [
+          {
+            "CategoryAuth" : []
+          }
+        ],
         "tags": [
           "Building API"
         ],
@@ -202,32 +227,41 @@
           }
         }
       }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "CategoryAuth" : {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key",
+        "description": "Authentication for Building API"
+      }
+
     },
-    "components": {
-      "schemas": {
-        "CreateOrUpdateBuilding": {
-          "type": "object",
-          "properties": {
-            "code": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            }
+    "schemas": {
+      "CreateOrUpdateBuilding": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
-        },
-        "Building": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "number"
-            },
-            "code": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            }
+        }
+      },
+      "Building": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "code": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
         }
       }

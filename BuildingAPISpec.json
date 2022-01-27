@@ -54,15 +54,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "code": {
-                    "type": "string"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                }
+                "$ref": "#/components/schemas/CreateOrUpdateBuilding"
               }
             }
           }
@@ -82,7 +74,7 @@
                       "type": "string"
                     },
                     "data": {
-                        "$ref": "#/components/schemas/Building"
+                      "$ref": "#/components/schemas/Building"
                     }
                   }
                 }
@@ -121,7 +113,87 @@
                       "type": "string"
                     },
                     "data": {
-                        "$ref": "#/components/schemas/Building"
+                      "$ref": "#/components/schemas/Building"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Building API"
+        ],
+        "summary": "Update building by Id",
+        "description": "Update building by Id",
+        "parameters": [
+          {
+            "name": "buildingId",
+            "in": "path",
+            "description": "Building Id"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateBuilding"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success update building",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Building"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Building API"
+        ],
+        "summary": "Delete building by Id",
+        "description": "Delete building by Id",
+        "parameters": [
+          {
+            "name": "buildingId",
+            "in": "path",
+            "description": "Building Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success delete Building",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "number"
+                    },
+                    "status": {
+                      "type": "string"
                     }
                   }
                 }
@@ -130,21 +202,32 @@
           }
         }
       }
-    }
-  },
-  "components": {
-    "schemas": {
-      "Building": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "code": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
+    },
+    "components": {
+      "schemas": {
+        "CreateOrUpdateBuilding": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "Building": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "code": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
           }
         }
       }

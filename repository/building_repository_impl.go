@@ -11,8 +11,12 @@ import (
 type BuildingRepositoryImpl struct {
 }
 
+func NewBuildingRepository() BuildingRepository {
+	return &BuildingRepositoryImpl{}
+}
+
 func (b *BuildingRepositoryImpl) Store(ctx context.Context, tx *sql.Tx, building domain.Building) domain.Building {
-	SQL := "insert into classroom_buildings(code,name) values(?)"
+	SQL := "insert into classroom_buildings(code,name) values(?,?)"
 	result, err := tx.ExecContext(ctx, SQL, building.Code, building.Name)
 	helper.PanicIfError(err)
 
@@ -33,7 +37,7 @@ func (b *BuildingRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, buildin
 
 func (b *BuildingRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, building domain.Building) {
 	SQL := "delete from classroom_buildings where id=?"
-	_, err := tx.ExecContext(ctx, SQL, building.Code, building.Name, building.Id)
+	_, err := tx.ExecContext(ctx, SQL, building.Id)
 	helper.PanicIfError(err)
 }
 
@@ -41,6 +45,8 @@ func (b *BuildingRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, build
 	SQL := "select id, code, name from classroom_buildings where id=?"
 	rows, err := tx.QueryContext(ctx, SQL, buildingId)
 	helper.PanicIfError(err)
+
+	defer rows.Close()
 
 	building := domain.Building{}
 	if rows.Next() {
@@ -56,6 +62,8 @@ func (b BuildingRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domai
 	SQL := "select id, code, name from classroom_buildings"
 	rows, err := tx.QueryContext(ctx, SQL)
 	helper.PanicIfError(err)
+
+	defer rows.Close()
 
 	var buildings []domain.Building
 	for rows.Next() {

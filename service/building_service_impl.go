@@ -16,6 +16,13 @@ type BuildingServiceImpl struct {
 	Validate           *validator.Validate
 }
 
+func NewBuildingService(buildingRepository repository.BuildingRepository, DB *sql.DB, validate *validator.Validate) BuildingService {
+	return &BuildingServiceImpl{
+		BuildingRepository: buildingRepository,
+		DB:                 DB,
+		Validate:           validate}
+}
+
 func (service *BuildingServiceImpl) Create(ctx context.Context, request web.BuildingCreateRequest) web.BuildingResponse {
 	err := service.Validate.Struct(request)
 	helper.PanicIfError(err)

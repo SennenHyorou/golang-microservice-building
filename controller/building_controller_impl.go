@@ -13,6 +13,12 @@ type BuildingControllerImpl struct {
 	BuildingService service.BuildingService
 }
 
+func NewBuildingController(buildingService service.BuildingService) BuildingController {
+	return &BuildingControllerImpl{
+		BuildingService: buildingService,
+	}
+}
+
 func (controller BuildingControllerImpl) Create(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
 	buildingCreateRequest := web.BuildingCreateRequest{}
 	helper.ReadFromRequestBody(request, &buildingCreateRequest)

@@ -3,18 +3,23 @@ package service
 import (
 	"context"
 	"database/sql"
-	"golang-microservice-building/helper"
-	"golang-microservice-building/model/domain"
-	"golang-microservice-building/model/web"
-	"golang-microservice-building/repository"
+	"github.com/SennenHyorou/golang-microservice-building/helper"
+	"github.com/SennenHyorou/golang-microservice-building/model/domain"
+	"github.com/SennenHyorou/golang-microservice-building/model/web"
+	"github.com/SennenHyorou/golang-microservice-building/repository"
+	"github.com/go-playground/validator/v10"
 )
 
 type BuildingServiceImpl struct {
 	BuildingRepository repository.BuildingRepository
 	DB                 *sql.DB
+	Validate           *validator.Validate
 }
 
 func (service *BuildingServiceImpl) Create(ctx context.Context, request web.BuildingCreateRequest) web.BuildingResponse {
+	err := service.Validate.Struct(request)
+	helper.PanicIfError(err)
+
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)
@@ -30,6 +35,9 @@ func (service *BuildingServiceImpl) Create(ctx context.Context, request web.Buil
 }
 
 func (service *BuildingServiceImpl) Update(ctx context.Context, request web.BuildingUpdateRequest) web.BuildingResponse {
+	err := service.Validate.Struct(request)
+	helper.PanicIfError(err)
+
 	tx, err := service.DB.Begin()
 	helper.PanicIfError(err)
 	defer helper.CommitOrRollback(tx)

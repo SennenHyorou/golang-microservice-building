@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"golang-microservice-building/helper"
-	"golang-microservice-building/model/domain"
+	"github.com/SennenHyorou/golang-microservice-building/helper"
+	"github.com/SennenHyorou/golang-microservice-building/model/domain"
 )
 
 type BuildingRepositoryImpl struct {

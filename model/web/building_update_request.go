@@ -1,7 +1,7 @@
 package web
 
 type BuildingUpdateRequest struct {
-	Id   int
-	Code string
-	Name string
+	Id   int    `validate:"required"`
+	Code string `validate:"required"`
+	Name string `validate:"required"`
 }

@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 	"database/sql"
-	"golang-microservice-building/model/domain"
+	"github.com/SennenHyorou/golang-microservice-building/model/domain"
 )
 
 type BuildingRepository interface {

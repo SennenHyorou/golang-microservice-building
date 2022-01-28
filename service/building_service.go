@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"golang-microservice-building/model/web"
+	"github.com/SennenHyorou/golang-microservice-building/model/web"
 )
 
 type BuildingService interface {

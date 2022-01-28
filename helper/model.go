@@ -1,8 +1,8 @@
 package helper
 
 import (
-	"golang-microservice-building/model/domain"
-	"golang-microservice-building/model/web"
+	"github.com/SennenHyorou/golang-microservice-building/model/domain"
+	"github.com/SennenHyorou/golang-microservice-building/model/web"
 )
 
 func ToBuildingResponse(building domain.Building) web.BuildingResponse {

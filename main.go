@@ -5,6 +5,7 @@ import (
 	"github.com/SennenHyorou/golang-microservice-building/controller"
 	"github.com/SennenHyorou/golang-microservice-building/exception"
 	"github.com/SennenHyorou/golang-microservice-building/helper"
+	"github.com/SennenHyorou/golang-microservice-building/middleware"
 	"github.com/SennenHyorou/golang-microservice-building/repository"
 	"github.com/SennenHyorou/golang-microservice-building/service"
 	"github.com/go-playground/validator/v10"
@@ -32,7 +33,7 @@ func main() {
 
 	server := http.Server{
 		Addr:    "localhost:3000",
-		Handler: router,
+		Handler: middleware.NewAuthMiddleware(router),
 	}
 
 	err := server.ListenAndServe()

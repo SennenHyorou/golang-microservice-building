@@ -1,10 +1,12 @@
 ### Get all buildings
 GET http://localhost:3000/api/buildings
+X-API-Key: KEY
 Accept: application/json
 
 ### Get new building
 POST http://localhost:3000/api/buildings
 Accept: application/json
+X-API-Key: KEY
 Content-Type: application/json
 
 {
@@ -14,10 +16,12 @@ Content-Type: application/json
 
 ### Get building by Id
 GET http://localhost:3000/api/buildings/1
+X-API-Key: KEY
 Accept: application/json
 
 ### Update building
 PUT http://localhost:3000/api/buildings/2
+X-API-Key: KEY
 Accept: application/json
 Content-Type: application/json
 
@@ -28,4 +32,5 @@ Content-Type: application/json
 
 ### Delete building
 DELETE http://localhost:3000/api/buildings/3
+X-API-Key: KEY
 Accept: application/json

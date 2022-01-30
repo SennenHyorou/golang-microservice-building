@@ -2,12 +2,13 @@ package app
 
 import (
 	"database/sql"
+	"github.com/SennenHyorou/golang-microservice-building/config"
 	"github.com/SennenHyorou/golang-microservice-building/helper"
 	"time"
 )
 
-func NewDB() *sql.DB {
-	db, err := sql.Open("mysql", "root:admin123@tcp(localhost:3306)/microservice_building?tls=skip-verify&autocommit=true")
+func NewDB(config *config.Config) *sql.DB {
+	db, err := sql.Open("mysql", config.GetDBConnStr())
 	helper.PanicIfError(err)
 
 	db.SetMaxIdleConns(5)

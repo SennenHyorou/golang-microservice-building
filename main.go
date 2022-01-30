@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/SennenHyorou/golang-microservice-building/app"
+	"github.com/SennenHyorou/golang-microservice-building/config"
 	"github.com/SennenHyorou/golang-microservice-building/controller"
 	"github.com/SennenHyorou/golang-microservice-building/exception"
 	"github.com/SennenHyorou/golang-microservice-building/helper"
@@ -15,8 +16,9 @@ import (
 )
 
 func main() {
+	conf := config.Get() // Load all config from Env first
 
-	db := app.NewDB()
+	db := app.NewDB(conf)
 	validate := validator.New()
 	buildingRepository := repository.NewBuildingRepository()
 	buildingService := service.NewBuildingService(buildingRepository, db, validate)
@@ -32,7 +34,7 @@ func main() {
 	router.PanicHandler = exception.ErrorHandler
 
 	server := http.Server{
-		Addr:    "localhost:3000",
+		Addr:    "localhost" + conf.GetAPIPort(),
 		Handler: middleware.NewAuthMiddleware(router),
 	}
 

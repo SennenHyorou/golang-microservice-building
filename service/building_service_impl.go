@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"database/sql"
+	"github.com/SennenHyorou/golang-microservice-building/exception"
 	"github.com/SennenHyorou/golang-microservice-building/helper"
 	"github.com/SennenHyorou/golang-microservice-building/model/domain"
 	"github.com/SennenHyorou/golang-microservice-building/model/web"
@@ -50,7 +51,9 @@ func (service *BuildingServiceImpl) Update(ctx context.Context, request web.Buil
 	defer helper.CommitOrRollback(tx)
 
 	building, err := service.BuildingRepository.FindById(ctx, tx, request.Id)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	building.Code = request.Code
 	building.Name = request.Name
@@ -66,7 +69,9 @@ func (service *BuildingServiceImpl) Delete(ctx context.Context, buildingId int) 
 	defer helper.CommitOrRollback(tx)
 
 	building, err := service.BuildingRepository.FindById(ctx, tx, buildingId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 
 	service.BuildingRepository.Delete(ctx, tx, building)
 }
@@ -77,7 +82,9 @@ func (service *BuildingServiceImpl) FindById(ctx context.Context, buildingId int
 	defer helper.CommitOrRollback(tx)
 
 	building, err := service.BuildingRepository.FindById(ctx, tx, buildingId)
-	helper.PanicIfError(err)
+	if err != nil {
+		panic(exception.NewNotFoundError(err.Error()))
+	}
 	return helper.ToBuildingResponse(building)
 }
 

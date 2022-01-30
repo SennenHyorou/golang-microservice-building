@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/SennenHyorou/golang-microservice-building/app"
 	"github.com/SennenHyorou/golang-microservice-building/controller"
+	"github.com/SennenHyorou/golang-microservice-building/exception"
 	"github.com/SennenHyorou/golang-microservice-building/helper"
 	"github.com/SennenHyorou/golang-microservice-building/repository"
 	"github.com/SennenHyorou/golang-microservice-building/service"
@@ -26,6 +27,8 @@ func main() {
 	router.POST("/api/buildings", buildingController.Create)
 	router.PUT("/api/buildings/:buildingId", buildingController.Update)
 	router.DELETE("/api/buildings/:buildingId", buildingController.Delete)
+
+	router.PanicHandler = exception.ErrorHandler
 
 	server := http.Server{
 		Addr:    "localhost:3000",
